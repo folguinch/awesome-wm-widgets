@@ -103,6 +103,7 @@ local function worker(user_args)
     local background_color = args.background_color or "#00000000"
     local enable_kill_button = args.enable_kill_button or false
     local process_info_max_length = args.process_info_max_length or -1
+    local shape = args.shape or gears.shape.rectangle
     local timeout = args.timeout or 1
 
     local cpugraph_widget = wibox.widget {
@@ -159,13 +160,22 @@ local function worker(user_args)
     --- By default graph widget goes from left to right, so we mirror it and push up a bit
     cpu_widget = wibox.widget {
         {
-            cpugraph_widget,
-            reflection = {horizontal = true},
-            layout = wibox.container.mirror
+            {
+                cpugraph_widget,
+                reflection = {horizontal = true},
+                layout = wibox.container.mirror
+            },
+            bottom = 2,
+            left = 3,
+            right = 3,
+            color = background_color,
+            widget = wibox.container.margin
         },
-        bottom = 2,
-        color = background_color,
-        widget = wibox.container.margin
+        bg = beautiful.bg_focus,
+        --shape_border_width = 0,
+        --shape_border_color = "#00FF00",
+        shape = shape,
+        widget = wibox.container.background,
     }
 
     -- This part runs constantly, also when the popup is closed.

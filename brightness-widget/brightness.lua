@@ -43,6 +43,7 @@ local function worker(user_args)
     local program = args.program or 'light'
     local step = args.step or 5
     local base = args.base or 20
+    local size = args.size or 18
     local current_level = 0 -- current brightness value
     local tooltip = args.tooltip or false
     local percentage = args.percentage or false
@@ -107,8 +108,8 @@ local function worker(user_args)
             max_value = 100,
             thickness = 2,
             start_angle = 4.71238898, -- 2pi*3/4
-            forced_height = 18,
-            forced_width = 18,
+            forced_height = size,
+            forced_width = size,
             paddings = 2,
             widget = wibox.container.arcchart,
             set_value = function(self, level)
